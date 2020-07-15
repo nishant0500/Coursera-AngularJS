@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Shopping List Check Off</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      .emptyMessage {
+        font-weight: bold;
+        color: red;
+        font-size: 1.2em;
+      }
+      h1,h2{
+        color:blue;
+        text-decoration: underline orange;
+      }
+      li {
+        margin-bottom: 7px;
+        font-size: 1.2em;
+      }
+      li > button {
+        margin-left: 6px;
+      }
+      button > i {
+        color: green;
+      }
+    </style>
+    <script src="angular.min.js"></script>
+    <script src="angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+</head>
+
+<body ng-app='ShoppingListCheckOff'>
+  <div class="container">
+  <h1>Shopping List Check Off</h1>
+
+  <div class="row">
+
+    <!-- To Buy List -->
+    <div class="col-md-6 desc" ng-controller='ToBuyController as ToBuy'>
+     <h2>To Buy:</h2>
+     <ul>
+       <li ng-repeat="item in ToBuy.items">Buy {{ item.quantity }}  {{ item.name }}<button class="btn btn-light" ng-click='ToBuy.removeItem($index);'><i class="fas fa-check"></i> Bought</button></li>
+     </ul>
+     <div class="emptyMessage" ng-if="ToBuy.items.length===0"><button class ="btn btn-outline-success">Everything is bought!</button> </div>
+    </div>
+
+    <!-- Already Bought List -->
+    <div class="col-md-6 desc" ng-controller='AlreadyBoughtController as Bought'>
+     <h2>Already Bought:</h2>
+     <ul>
+       <li ng-repeat="item in Bought.items">Bought {{item.quantity}} {{item.name}}</li>
+     </ul>
+     <div class="emptyMessage" ng-show="Bought.items.length==0"><button class="btn btn-outline-danger" >Nothing Bought Yet!</button></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
